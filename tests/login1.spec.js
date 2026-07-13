@@ -24,3 +24,4 @@ test('OrangeHRM Login Test', async ({ page }) => {
   await expect(page).toHaveURL(/dashboard/);
   await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
 });
+// Learning Git Push and Pull - Day 2
