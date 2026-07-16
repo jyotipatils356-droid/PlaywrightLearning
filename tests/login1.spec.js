@@ -18,7 +18,7 @@ test('OrangeHRM Login Test', async ({ page }) => {
   await page.getByPlaceholder('Password').fill('admin123');
 
   // Click Login
-await page.getByRole('button', { name: 'Sign In' }).click();
+await page.getByRole('button', { name: 'Login' }).click();
   // Verify Dashboard
   await expect(page).toHaveURL(/dashboard/);
   await expect(page.getByRole('heading', { name: 'Dashboard' })).toBeVisible();
