@@ -1,25 +1,29 @@
-class LoginPage {
+export class LoginPage {
 
-    constructor(page){
+    constructor(page) {
         this.page = page;
 
-        this.usernameTextbox = page.locator('input[name="username"]');
-        this.passwordTextbox = page.locator('input[name="password"]');
+        this.usernameInput = page.locator('input[name="username"]');
+        this.passwordInput = page.locator('input[name="password"]');
         this.loginButton = page.locator('button[type="submit"]');
+        this.forgotPasswordLink = page.getByText('Forgot your password?');
     }
 
-    async openWebsite() {
+    async openApplication() {
         await this.page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
     }
 
     async login(username, password) {
-
-        await this.usernameTextbox.fill(username);
-
-        await this.passwordTextbox.fill(password);
-
+        await this.usernameInput.fill(username);
+        await this.passwordInput.fill(password);
         await this.loginButton.click();
     }
-}
 
-module.exports = LoginPage;
+    async clickForgotPassword() {
+        await this.forgotPasswordLink.click();
+    }
+    async logout() {
+    await this.page.locator('.oxd-userdropdown-tab').click();
+    await this.page.getByRole('menuitem', { name: 'Logout' }).click();
+}
+}
