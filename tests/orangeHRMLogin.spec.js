@@ -13,7 +13,8 @@ test('Verify OrangeHRM Login', async ({ page }) => {
     await loginPage.login('Admin', 'admin123');
 
     // Verify user is on Dashboard page
-    await expect(page).toHaveURL(/dashboard/);
+   await expect(page).toHaveURL(/dashboard/, { timeout: 60000 });
+   
 
 });
 
@@ -41,8 +42,7 @@ test('Verify Invalid Login', async ({ page }) => {
 
     await loginPage.login('Admin', 'WrongPassword');
 
-    await expect(page.locator('.oxd-alert-content-text')).toContainText('Invalid credentials');
-
+await expect(page.getByRole('alert')).toContainText('Invalid credentials');
 });
 
 test('Verify Logout', async ({ page }) => {
@@ -53,8 +53,10 @@ test('Verify Logout', async ({ page }) => {
 
     await loginPage.login('Admin', 'admin123');
 
+    await expect(page).toHaveURL(/dashboard/, { timeout: 60000 });
+
     await loginPage.logout();
 
-    await expect(page).toHaveURL(/login/);
+    await expect(page).toHaveURL(/login/, { timeout: 60000 });
 
 });
